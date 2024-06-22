@@ -17,8 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Job.BL\Job.BL.csproj" />
+    <ProjectReference Include="..\..\Bussiness\Job.BL\Job.BL.csproj" />
+    <ProjectReference Include="..\..\Bussiness\Job.DL\Job.DL.csproj" />
+    <ProjectReference Include="..\..\Core\Job.Util\Job.Util.csproj" />
   </ItemGroup>
+
 
   <ItemGroup>
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
