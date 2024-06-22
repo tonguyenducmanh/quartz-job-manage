@@ -197,8 +197,16 @@ namespace Job.BL
                                          .RepeatForever())
                                          .Build();
 
-                        await scheduler.ScheduleJob(job, trigger);
-                        createSuccess = true;
+                        bool existedJob = await scheduler.CheckExists(job.Key);
+                        if (existedJob)
+                        {
+                            createSuccess = false;
+                        }
+                        else
+                        {
+                            await scheduler.ScheduleJob(job, trigger);
+                            createSuccess = true;
+                        }
                     }
                 }
             }
