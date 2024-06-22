@@ -13,7 +13,7 @@ namespace Job.Util
         /// <summary>
         /// root path của container
         /// </summary>
-        private static string _sroucePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        private static string _sroucePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "";
 
         /// <summary>
         /// biến lưu trữ cấu hình
