@@ -16,3 +16,6 @@ nhập enum của job muốn tạo và xóa
 
 2 project chính của solution là Job.API dùng để tạo và check job và Job.Worker dùng để thực thi job
 ![solution](Img/solution.png)
+
+Lưu ý: trong solution này sử dụng các hàm mặc định được cung cấp bởi Quartz.NET để insert và delete job trong database. Không được phép tự viết câu lệnh insert, delete, update cho các database này do có thể gây ra deadlock. Thư viện đã lo vụ này ổn rồi thì cứ dùng
+![DeadLockPrevent](Img/DeadLockPrevent.png)
