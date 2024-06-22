@@ -1,5 +1,6 @@
 ﻿using Job.Model;
 using Job.Util;
+using System.Collections.Specialized;
 
 namespace Job.Test.Util
 {
@@ -17,6 +18,16 @@ namespace Job.Test.Util
         {
             CenterConfig centerConfig = JobUtility.ConfigGlobal;
             Assert.IsTrue(centerConfig != null);
+        }
+
+        /// <summary>
+        /// kiểm thử việc lấy ra cấu hình thư viện Quartz.Net
+        /// </summary>
+        [TestMethod]
+        public void GetQuartzConfig_Success()
+        {
+            NameValueCollection quartzConfig = JobUtility.GetQuartzConfig();
+            Assert.IsNotNull(quartzConfig);
         }
     }
 }

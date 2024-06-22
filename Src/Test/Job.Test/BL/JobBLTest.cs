@@ -39,6 +39,16 @@ namespace Job.Test.BL
             Assert.IsTrue(dbSize > 0);
         }
 
+        /// <summary>
+        /// kiểm tra xem có bảng lệnh quartz trong database không
+        /// </summary>
+        [TestMethod]
+        public void GetSchedule_Success()
+        {
+            bool hasScheduler = ObjectTest.CheckHasScheduler().GetAwaiter().GetResult();
+            Assert.IsTrue(hasScheduler);
+        }
+
         #endregion
     }
 
