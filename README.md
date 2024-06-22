@@ -19,3 +19,23 @@ nhập enum của job muốn tạo và xóa
 
 Lưu ý: trong solution này sử dụng các hàm mặc định được cung cấp bởi Quartz.NET để insert và delete job trong database. Không được phép tự viết câu lệnh insert, delete, update cho các database này do có thể gây ra deadlock. Thư viện đã lo vụ này ổn rồi thì cứ dùng
 ![DeadLockPrevent](Img/DeadLockPrevent.png)
+
+Hướng dẫn chạy project
+
+Bước 1:
+Tạo 1 database mới
+Dán connection string của postgreSQL local vào config
+![alt text](Img/Step1.png)
+
+Bước 2:
+
+Chạy toàn bộ script có trong file sau trong postgresql ở database vừa tạo
+![alt text](Img/Step2.png)
+
+Bước 3:
+
+Start 2 project là Job.API và Job.Worker
+
+Bước 4:
+
+chạy 2 api tạo lệnh và xóa lệnh, kiểm tra kết quả ở cửa sổ console của worker
