@@ -95,6 +95,85 @@ namespace Job.BL
             return hasScheduler;
         }
 
+        #region Stupid codes
+
+        /// <summary>
+        /// lấy ra tên group dựa vào enum job
+        /// </summary>
+        private string GetGroupByJobType(int jobType)
+        {
+            string result = "";
+            switch (jobType) 
+            {
+                case (int)JobEnum.ByeByeJob:
+                    result = "groupbyebye";
+                    break;
+                case (int)JobEnum.HaveANightDayJob:
+                    result = "grouphaveanightday";
+                    break;
+                case (int)JobEnum.HelloJob:
+                    result = "grouphello";
+                    break;
+                default:
+                    break;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// lấy ra tên job dựa vào enum job
+        /// </summary>
+        private string GetJobNameByJobType(int jobType)
+        {
+            string result = "";
+            switch (jobType)
+            {
+                case (int)JobEnum.ByeByeJob:
+                    result = "jobbyebye";
+                    break;
+                case (int)JobEnum.HaveANightDayJob:
+                    result = "jobhaveanightday";
+                    break;
+                case (int)JobEnum.HelloJob:
+                    result = "jobhello";
+                    break;
+                default:
+                    break;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// tạo ra job
+        /// </summary>
+        private IJobDetail BuildJobDetail(int jobType)
+        {
+            IJobDetail result = null;
+            switch (jobType)
+            {
+                case (int)JobEnum.ByeByeJob:
+                    result = JobBuilder.Create<ByeByeJob>()
+                                     .WithIdentity(GetJobNameByJobType(jobType), GetGroupByJobType(jobType))
+                                     .Build();
+                    break;
+                case (int)JobEnum.HaveANightDayJob:
+                    result = JobBuilder.Create<HaveANightDayJob>()
+                                     .WithIdentity(GetJobNameByJobType(jobType), GetGroupByJobType(jobType))
+                                     .Build();
+                    break;
+                case (int)JobEnum.HelloJob:
+                    result = JobBuilder.Create<HelloJob>()
+                                     .WithIdentity(GetJobNameByJobType(jobType), GetGroupByJobType(jobType))
+                                     .Build();
+                    break;
+                default:
+                    break;
+            }
+            return result;
+        }
+
+        #endregion
+
         /// <summary>
         /// thêm job
         /// </summary>
@@ -109,18 +188,15 @@ namespace Job.BL
                     IScheduler? scheduler = await GetScheduler();
                     if (scheduler != null)
                     {
-                        IJobDetail job = JobBuilder.Create<HelloJob>()
-                                     .WithIdentity("job1", "group1")
-                                     .Build();
+                        IJobDetail job = BuildJobDetail(jobType);
                         ITrigger trigger = TriggerBuilder.Create()
-                                         .WithIdentity("trigger1", "group1")
+                                         .WithIdentity(GetJobNameByJobType(jobType), GetGroupByJobType(jobType))
                                          .StartNow()
                                          .WithSimpleSchedule(x => x
                                          .WithIntervalInSeconds(JobUtility.ConfigGlobal.SleepBetweenTwoTime)
                                          .RepeatForever())
                                          .Build();
 
-                        // Tell Quartz to schedule the job using our trigger
                         await scheduler.ScheduleJob(job, trigger);
                         createSuccess = true;
                     }
@@ -149,8 +225,7 @@ namespace Job.BL
                     IScheduler? scheduler = await GetScheduler();
                     if (scheduler != null)
                     {
-                        JobKey jobKey = new JobKey("job1", "group1");
-                        TriggerKey triggerKey = new TriggerKey("trigger1", "group1");
+                        TriggerKey triggerKey = new TriggerKey(GetJobNameByJobType(jobType), GetGroupByJobType(jobType));
                         deleteSuccess = await scheduler.UnscheduleJob(triggerKey);
                     }
                 }
