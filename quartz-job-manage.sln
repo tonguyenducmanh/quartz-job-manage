@@ -26,6 +26,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Job.Test", "Job.Test\Job.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Job.Util", "Job.Util\Job.Util.csproj", "{F9E9F5B0-0AB0-447C-B332-9CD80AD3BD53}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{E114E927-A45A-49D6-AC36-DFB0D15D6E4D}"
+	ProjectSection(SolutionItems) = preProject
+		Config\appsettings.json = Config\appsettings.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

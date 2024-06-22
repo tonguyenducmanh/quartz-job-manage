@@ -10,7 +10,7 @@
 		<ProjectReference Include="..\Job.Model\Job.Model.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<ContentWithTargetPath Include="Config\**">
+		<ContentWithTargetPath Include="..\Config\**">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<TargetPath>Config\%(RecursiveDir)\%(Filename)%(Extension)</TargetPath>
 		</ContentWithTargetPath>
