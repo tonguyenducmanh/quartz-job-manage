@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Job.Test.BL
+﻿namespace Job.Test.BL
 {
     /// <summary>
     /// Class test job BL
