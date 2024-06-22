@@ -5,6 +5,9 @@
     /// </summary>
     public class CenterConfig
     {
-
+        /// <summary>
+        /// connection string kết nối tới database PostgreSQL
+        /// </summary>
+        public string? PostgreDBCnn { get; set; }
     }
 }
