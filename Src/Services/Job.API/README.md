@@ -1,0 +1,1 @@
+﻿Project cung cấp các api thực hiện thêm sửa xóa và đọc paging các job có trong db cho thư viện Quatz.NET chạy ở worker
