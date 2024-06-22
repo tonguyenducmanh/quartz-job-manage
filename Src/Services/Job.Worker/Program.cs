@@ -3,6 +3,8 @@ using Job.Worker.Log;
 using Microsoft.Extensions.Hosting;
 using Quartz;
 using Microsoft.Extensions.DependencyInjection;
+using Job.BL;
+
 namespace Job.Worker
 {
     public class Program

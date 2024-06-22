@@ -32,7 +32,7 @@ namespace Job.API.Controllers
         /// <summary>
         /// Đối tượng BL xử lý nghiệp vụ về job
         /// </summary>
-        public JobBL Object
+        public JobBL BLObject
         {
             get 
             {

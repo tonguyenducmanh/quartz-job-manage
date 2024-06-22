@@ -1,6 +1,6 @@
 ﻿using Quartz;
 
-namespace Job.Worker
+namespace Job.BL
 {
     /// <summary>
     /// Class test việc chạy job
