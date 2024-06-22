@@ -14,5 +14,5 @@ khi start solution sẽ mở ra 1 giao diện danh sách api, trong này gồm c
 nhập enum của job muốn tạo và xóa
 ![API tạo và xóa lệnh](Img/ApiList.png)
 
-2 project chính của solution là Job.API dùng để tạo và check hob và Job.Worker dùng để thực thi job
+2 project chính của solution là Job.API dùng để tạo và check job và Job.Worker dùng để thực thi job
 ![solution](Img/solution.png)
