@@ -7,6 +7,9 @@ mỗi job sẽ chạy vô hạn lần, cách nhau 3 giây sẽ chạy lại
 
 ![demo kết quả](Img/Demo.png)
 
+Danh sách lệnh đã tạo trong database postgreSQL
+![Danh sách lệnh trong DB](Img/JobInDatabase.png)
+
 khi start solution sẽ mở ra 1 giao diện danh sách api, trong này gồm có đầu api tạo lệnh và xóa lệnh
 nhập enum của job muốn tạo và xóa
 ![API tạo và xóa lệnh](Img/ApiList.png)
