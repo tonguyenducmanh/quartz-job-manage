@@ -9,8 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Job.Management", "Job.Manag
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{A5791B69-0712-4EA3-8E6A-FA3DC51516A6}"
 	ProjectSection(SolutionItems) = preProject
+		Config\AppSettings.json = Config\AppSettings.json
 		Config\JobStorage.json = Config\JobStorage.json
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{F06C808D-9304-47AB-9B9D-EB35AAEA0966}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Job.Model", "Job.Model\Job.Model.csproj", "{0800D008-9DB2-4224-8B4D-664826205935}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +31,10 @@ Global
 		{8FCA7CFE-F73C-49F7-8CA3-FD4F78064500}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FCA7CFE-F73C-49F7-8CA3-FD4F78064500}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FCA7CFE-F73C-49F7-8CA3-FD4F78064500}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0800D008-9DB2-4224-8B4D-664826205935}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0800D008-9DB2-4224-8B4D-664826205935}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0800D008-9DB2-4224-8B4D-664826205935}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0800D008-9DB2-4224-8B4D-664826205935}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

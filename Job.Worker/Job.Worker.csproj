@@ -8,4 +8,7 @@
 	<ItemGroup>
 		<PackageReference Include="Quartz" Version="3.9.0" />
 	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Job.Model\Job.Model.csproj" />
+	</ItemGroup>
 </Project>

@@ -1,0 +1,1 @@
+﻿Project lưu các model dùng cho các project khác
