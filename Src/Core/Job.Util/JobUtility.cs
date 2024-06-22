@@ -67,6 +67,14 @@ namespace Job.Util
             return config ?? new CenterConfig();
         }
        
+        /// <summary>
+        /// Lấy ra thời điểm hiện tại
+        /// </summary>
+        /// <returns></returns>
+        public static string GetDateTimeNow()
+        {
+            return DateTime.Now.ToString("H:mm:ss");
+        }
     }
 
 }

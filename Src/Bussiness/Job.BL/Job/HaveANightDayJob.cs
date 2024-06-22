@@ -1,4 +1,5 @@
-﻿using Quartz;
+﻿using Job.Util;
+using Quartz;
 using System.Text;
 
 namespace Job.BL
@@ -11,7 +12,7 @@ namespace Job.BL
         public async Task Execute(IJobExecutionContext context)
         {
             Console.OutputEncoding = Encoding.UTF8;
-            await Console.Out.WriteLineAsync($"Lời nhắn gửi từ class {nameof(HaveANightDayJob)}: Have a night day !!!");
+            await Console.Out.WriteLineAsync($"{JobUtility.GetDateTimeNow()} Lời nhắn gửi từ class {nameof(HaveANightDayJob)}: Have a night day !!!");
         }
     }
 }
