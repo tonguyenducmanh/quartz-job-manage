@@ -28,7 +28,7 @@ namespace Job.Worker
             }).Build();
 
 
-            NameValueCollection props = JobUtility.GetQuartzConfig();
+            NameValueCollection props = JobUtility.QuartzConfig;
             if (props?.Count > 0)
             {
                 StdSchedulerFactory stdScheduler = new StdSchedulerFactory(props);

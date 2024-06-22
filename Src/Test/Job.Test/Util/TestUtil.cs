@@ -26,7 +26,7 @@ namespace Job.Test.Util
         [TestMethod]
         public void GetQuartzConfig_Success()
         {
-            NameValueCollection quartzConfig = JobUtility.GetQuartzConfig();
+            NameValueCollection quartzConfig = JobUtility.QuartzConfig;
             Assert.IsNotNull(quartzConfig);
         }
     }

@@ -33,12 +33,32 @@ namespace Job.Util
                 return _centerConfig;
             } 
         }
+        
+        /// <summary>
+        /// cấu hình chạy thư viện quartz
+        /// </summary>
+        private static NameValueCollection? _quartzConfig;
+
+        /// <summary>
+        /// cấu hình chạy thư viện quartz
+        /// </summary>
+        public static NameValueCollection QuartzConfig
+        {
+            get
+            {
+                if(_quartzConfig == null)
+                {
+                    _quartzConfig = GetQuartzConfig();
+                }
+                return _quartzConfig;
+            }
+        }
 
         /// <summary>
         /// lấy ra cấu hình quartz
         /// </summary>
         /// <returns></returns>
-        public static NameValueCollection GetQuartzConfig()
+        private static NameValueCollection GetQuartzConfig()
         {
             Dictionary<string, string> configQuartz = ConfigGlobal?.ConfigQuartz ?? new Dictionary<string, string>();
             NameValueCollection result = new NameValueCollection();
