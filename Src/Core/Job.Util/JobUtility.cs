@@ -40,24 +40,17 @@ namespace Job.Util
         /// <returns></returns>
         public static NameValueCollection GetQuartzConfig()
         {
-            NameValueCollection configQuartz = new NameValueCollection();
-            if (ConfigGlobal != null)
+            Dictionary<string, string> configQuartz = ConfigGlobal?.ConfigQuartz ?? new Dictionary<string, string>();
+            NameValueCollection result = new NameValueCollection();
+            if (configQuartz != null)
             {
-                configQuartz.Add("quartz.scheduler.instanceName", ConfigGlobal.InstanceName);
-                configQuartz.Add("quartz.scheduler.instanceId",ConfigGlobal.InstanceId);
-                configQuartz.Add("quartz.threadPool.type", ConfigGlobal.ThreadPoolType);
-                configQuartz.Add("quartz.threadPool.threadCount", ConfigGlobal.ThreadCount);
-                configQuartz.Add("quartz.jobStore.misfireThreshold", ConfigGlobal.MisfireThreshold);
-                configQuartz.Add("quartz.jobStore.useProperties", ConfigGlobal.UseProperties);
-                configQuartz.Add("quartz.jobStore.type", ConfigGlobal.JobStoreType);
-                configQuartz.Add("quartz.jobStore.driverDelegateType", ConfigGlobal.DriverDelegateType);
-                configQuartz.Add("quartz.jobStore.dataSource", "default");
-                configQuartz.Add("quartz.jobStore.tablePrefix", ConfigGlobal.TablePrefix);
-                configQuartz.Add("quartz.dataSource.default.connectionString", ConfigGlobal.PostgreDBCnn);
-                configQuartz.Add("quartz.dataSource.default.provider", ConfigGlobal.QuartzProvider);
-                configQuartz.Add("quartz.serializer.type", "json");
+                result = new NameValueCollection(configQuartz.Count);
+                foreach (var k in configQuartz)
+                {
+                    result.Add(k.Key, k.Value);
+                }
             }
-            return configQuartz;
+            return result;
         }
 
         /// <summary>
