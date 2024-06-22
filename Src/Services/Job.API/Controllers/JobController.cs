@@ -68,9 +68,33 @@ namespace Job.API.Controllers
         public IActionResult CheckHasJob() 
         {
             bool hasAnyJob = BLObject.CheckHasScheduler().GetAwaiter().GetResult();
-            return hasAnyJob ? Ok(hasAnyJob) : NotFound();
+            string resultText = hasAnyJob ? "Đã có scheduler trong database":"Không ó scheduler";
+            return Ok(resultText);
         }
 
+        /// <summary>
+        /// thêm mới 1 job và 1 trigger đi kèm nếu chưa tồn tại
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("create_job/{jobType}")]
+        public async Task<IActionResult> CreateIfNotExistsJob(int jobType) 
+        {
+            bool createJobSuccess = await BLObject.CreateJobByType(jobType);
+            string resultText = createJobSuccess ? "Tạo job thành công" : "Tạo job không thành công";
+            return Ok(resultText);
+        }
+
+        /// <summary>
+        /// xóa 1 job và 1 trigger đi kèm nếu tồn tại
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("delete_job/{jobType}")]
+        public async Task<IActionResult> DeleteIfExistsJob(int jobType)
+        {
+            bool deleteJobSuccess = await BLObject.DeleteIfExistsJob(jobType);
+            string resultText = deleteJobSuccess ? "Xóa job thành công" : "Xóa không thành công";
+            return Ok(resultText);
+        }
         #endregion
     }
 }
