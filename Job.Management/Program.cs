@@ -1,6 +1,6 @@
 ﻿namespace Job.Management
 {
-    public class JobWorker
+    public class Program
     {
         static void Main(string[] args)
         {
