@@ -48,6 +48,7 @@ namespace Job.API.Controllers
 
 
         #region Methods
+
         /// <summary>
         /// test rằng controller này chạy được
         /// </summary>
@@ -56,6 +57,18 @@ namespace Job.API.Controllers
         public IActionResult Get()
         {
             return Ok("Test job controller thành công");
+        }
+
+
+        /// <summary>
+        /// Kiểm tra xem có scheduler nào không
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("check_has_scheduler")]
+        public IActionResult CheckHasJob() 
+        {
+            bool hasAnyJob = BLObject.CheckHasScheduler().GetAwaiter().GetResult();
+            return hasAnyJob ? Ok(hasAnyJob) : NotFound();
         }
 
         #endregion

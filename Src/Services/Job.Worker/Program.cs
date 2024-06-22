@@ -4,6 +4,9 @@ using Microsoft.Extensions.Hosting;
 using Quartz;
 using Microsoft.Extensions.DependencyInjection;
 using Job.BL;
+using Job.Util;
+using Quartz.Impl;
+using System.Collections.Specialized;
 
 namespace Job.Worker
 {
@@ -25,25 +28,17 @@ namespace Job.Worker
             }).Build();
 
 
-            ISchedulerFactory? schedulerFactory = builder.Services.GetRequiredService<ISchedulerFactory>();
-            IScheduler? scheduler = await schedulerFactory.GetScheduler();
+            NameValueCollection props = JobUtility.GetQuartzConfig();
+            if (props?.Count > 0)
+            {
+                StdSchedulerFactory stdScheduler = new StdSchedulerFactory(props);
+                IScheduler? scheduler = await stdScheduler.GetScheduler();
+                if (scheduler != null)
+                {
 
-            // define the job and tie it to our HelloJob class
-            IJobDetail? job = JobBuilder.Create<HelloJob>()
-                .WithIdentity("myJob", "group1")
-                .Build();
-
-            // Trigger the job to run now, and then every 5 seconds
-            ITrigger? trigger = TriggerBuilder.Create()
-                .WithIdentity("myTrigger", "group1")
-                .StartNow()
-                .WithSimpleSchedule(x => x
-                    .WithIntervalInSeconds(5)
-                    .RepeatForever())
-                .Build();
-
-            await scheduler.ScheduleJob(job, trigger);
-
+                    await scheduler.Start();
+                }
+            }
 
             // will block until the last running job completes
             await builder.RunAsync();
