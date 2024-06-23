@@ -246,6 +246,63 @@ namespace Job.BL
             return deleteSuccess;
         }
 
+        /// <summary>
+        /// tạm dừng 1 job theo key
+        /// </summary>
+        public async Task<bool> PauseJobByType(int jobType)
+        {
+            bool pauseSuccess = false;
+            try
+            {
+                bool hasEnum = Enum.IsDefined(typeof(JobEnum), jobType);
+                if (hasEnum)
+                {
+                    IScheduler? scheduler = await GetScheduler();
+                    if (scheduler != null)
+                    {
+                        IJobDetail job = BuildJobDetail(jobType);
+                        await scheduler.PauseJob(job.Key);
+                        pauseSuccess = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.OutputEncoding = Encoding.UTF8;
+                Console.WriteLine($"Đã có lỗi xảy ra khi tạm dừng 1 job {ex}");
+            }
+            return pauseSuccess;
+        }
+
+
+        /// <summary>
+        /// tiếp tục 1 job theo key
+        /// </summary>
+        public async Task<bool> ResumeJobByType(int jobType)
+        {
+            bool resumeSuccess = false;
+            try
+            {
+                bool hasEnum = Enum.IsDefined(typeof(JobEnum), jobType);
+                if (hasEnum)
+                {
+                    IScheduler? scheduler = await GetScheduler();
+                    if (scheduler != null)
+                    {
+                        IJobDetail job = BuildJobDetail(jobType);
+                        await scheduler.ResumeJob(job.Key);
+                        resumeSuccess = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.OutputEncoding = Encoding.UTF8;
+                Console.WriteLine($"Đã có lỗi xảy ra khi tiếp tục chạy 1 job đã tạm dừng {ex}");
+            }
+            return resumeSuccess;
+        }
+
         #endregion
     }
 }

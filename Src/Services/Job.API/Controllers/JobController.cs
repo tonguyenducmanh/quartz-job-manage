@@ -76,7 +76,7 @@ namespace Job.API.Controllers
         /// thêm mới 1 job và 1 trigger đi kèm nếu chưa tồn tại
         /// </summary>
         /// <returns></returns>
-        [HttpGet("create_job/{jobType}")]
+        [HttpGet("create/{jobType}")]
         public async Task<IActionResult> CreateIfNotExistsJob(int jobType) 
         {
             bool createJobSuccess = await BLObject.CreateJobByType(jobType);
@@ -88,11 +88,35 @@ namespace Job.API.Controllers
         /// xóa 1 job và 1 trigger đi kèm nếu tồn tại
         /// </summary>
         /// <returns></returns>
-        [HttpGet("delete_job/{jobType}")]
+        [HttpGet("delete/{jobType}")]
         public async Task<IActionResult> DeleteIfExistsJob(int jobType)
         {
             bool deleteJobSuccess = await BLObject.DeleteIfExistsJob(jobType);
             string resultText = deleteJobSuccess ? "Xóa job thành công" : "Xóa không thành công";
+            return Ok(resultText);
+        }
+
+        /// <summary>
+        /// tạm ngưng 1 job
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("pause/{jobType}")]
+        public async Task<IActionResult> PauseJobByType(int jobType)
+        {
+            bool pauseJobSuccess = await BLObject.PauseJobByType(jobType);
+            string resultText = pauseJobSuccess ? "Tạm ngưng 1 job thành công" : "Tạm ngưng 1 job không thành công";
+            return Ok(resultText);
+        }
+
+        /// <summary>
+        /// tiếp tục 1 job
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("resume/{jobType}")]
+        public async Task<IActionResult> ResumeJobByType(int jobType)
+        {
+            bool pauseJobSuccess = await BLObject.ResumeJobByType(jobType);
+            string resultText = pauseJobSuccess ? "Tiếp tục chạy 1 job thành công" : "Tiếp tục chạy 1 job không thành công";
             return Ok(resultText);
         }
         #endregion
