@@ -49,3 +49,7 @@ Lưu ý: trong solution này sử dụng các hàm mặc định được cung c
 Cấu hình chạy cluster phục vụ cho việc triển khai nhiều pod dựa trên 1 image docker ( phân tải job cho nhiều worker)
 
 ![clustering](Img/Clustering.png)
+
+Trường hợp muốn update thông tin của 1 job có sẵn, sử dụng các hàm overload có cờ replace
+
+![upate](Img/UpdateJob.png)
