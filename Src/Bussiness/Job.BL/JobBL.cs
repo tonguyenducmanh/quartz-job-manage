@@ -107,7 +107,7 @@ namespace Job.BL
                     result = new JobTriggerConfigByType()
                     {
                         JobName = "ByeByeJob",
-                        JobGroup = "GroupJobOne",
+                        JobGroup = "GroupOne",
                         TriggerName = "ByeByeTrigger",
                         TriggerGroup = "GroupTriggerOne"
                     };
@@ -116,7 +116,7 @@ namespace Job.BL
                     result = new JobTriggerConfigByType()
                     {
                         JobName = "HaveANightDayJob",
-                        JobGroup = "GroupJobOne",
+                        JobGroup = "GroupOne",
                         TriggerName = "HaveANightDayTrigger",
                         TriggerGroup = "GroupTriggerOne"
                     };
@@ -125,7 +125,7 @@ namespace Job.BL
                     result = new JobTriggerConfigByType()
                     {
                         JobName = "HelloJob",
-                        JobGroup = "GroupJobOne",
+                        JobGroup = "GroupOne",
                         TriggerName = "HelloTrigger",
                         TriggerGroup = "GroupTriggerOne"
                     };
@@ -134,36 +134,36 @@ namespace Job.BL
                     result = new JobTriggerConfigByType()
                     {
                         JobName = "GoodAfternoonJob",
-                        JobGroup = "GroupJobTwo",
+                        JobGroup = "GroupTwo",
                         TriggerName = "GoodAfternoonTrigger",
-                        TriggerGroup = "GroupTriggerTwo"
+                        TriggerGroup = "GroupTwo"
                     };
                     break;
                 case (int)JobEnum.GoodEveningJob:
                     result = new JobTriggerConfigByType()
                     {
                         JobName = "GoodEveningJob",
-                        JobGroup = "GroupJobTwo",
+                        JobGroup = "GroupTwo",
                         TriggerName = "GoodEveningTrigger",
-                        TriggerGroup = "GroupTriggerTwo"
+                        TriggerGroup = "GroupTwo"
                     };
                     break;
                 case (int)JobEnum.GoodMorningJob:
                     result = new JobTriggerConfigByType()
                     {
                         JobName = "GoodMorningJob",
-                        JobGroup = "GroupJobTwo",
+                        JobGroup = "GroupTwo",
                         TriggerName = "GoodMorningTrigger",
-                        TriggerGroup = "GroupTriggerTwo"
+                        TriggerGroup = "GroupTwo"
                     };
                     break;
                 case (int)JobEnum.GoodNightJob:
                     result = new JobTriggerConfigByType()
                     {
                         JobName = "GoodNightJob",
-                        JobGroup = "GroupJobTwo",
+                        JobGroup = "GroupTwo",
                         TriggerName = "GoodNightTrigger",
-                        TriggerGroup = "GroupTriggerTwo"
+                        TriggerGroup = "GroupTwo"
                     };
                     break;
             }
