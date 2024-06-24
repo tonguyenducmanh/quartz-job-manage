@@ -13,6 +13,7 @@ namespace Job.BL
         {
             Console.OutputEncoding = Encoding.UTF8;
             await Console.Out.WriteLineAsync($"{JobUtility.GetDateTimeNow()} Lời nhắn gửi từ class {nameof(HaveANightDayJob)}: Have a night day !!!");
+            Thread.Sleep(10000);
         }
     }
 }

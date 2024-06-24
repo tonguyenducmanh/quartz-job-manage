@@ -13,6 +13,7 @@ namespace Job.BL
         {
             Console.OutputEncoding = Encoding.UTF8;
             await Console.Out.WriteLineAsync($"{JobUtility.GetDateTimeNow()} Lời nhắn gửi từ class {nameof(HelloJob)}: Xin chào !!!");
+            Thread.Sleep(10000);
         }
     }
 }
