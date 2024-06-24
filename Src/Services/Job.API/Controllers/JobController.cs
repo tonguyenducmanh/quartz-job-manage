@@ -83,6 +83,19 @@ namespace Job.API.Controllers
             string resultText = createJobSuccess ? "Tạo job thành công" : "Tạo job không thành công";
             return Ok(resultText);
         }
+        /// <summary>
+        /// tạo all
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("create_all")]
+        public async Task<IActionResult> CreateAllJob()
+        {
+            for (int i = 0; i < 7; i++)
+            {
+                await BLObject.CreateJobByType(i + 1);
+            }
+            return Ok();
+        }
 
         /// <summary>
         /// xóa 1 job và 1 trigger đi kèm nếu tồn tại
@@ -96,6 +109,19 @@ namespace Job.API.Controllers
             return Ok(resultText);
         }
 
+        /// <summary>
+        /// xóa all
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("delete_all")]
+        public async Task<IActionResult> DeleteAllJob()
+        {
+            for (int i = 0; i < 7; i++) 
+            {
+                await BLObject.DeleteIfExistsJob(i + 1);
+            }
+            return Ok();
+        }
         /// <summary>
         /// tạm ngưng 1 job
         /// </summary>
