@@ -33,15 +33,16 @@ namespace Job.BL
         /// <summary>
         /// đối tượng DL để query
         /// </summary>
-        private JobDL DLObject { 
-            get 
+        private JobDL DLObject
+        {
+            get
             {
-                if(_dlObject == null)
+                if (_dlObject == null)
                 {
                     _dlObject = new JobDL();
                 }
-                return _dlObject; 
-            } 
+                return _dlObject;
+            }
         }
 
 
@@ -97,47 +98,73 @@ namespace Job.BL
 
         #region Stupid codes
 
-        /// <summary>
-        /// lấy ra tên group dựa vào enum job
-        /// </summary>
-        private string GetGroupByJobType(int jobType)
+        private JobTriggerConfigByType? GetJobTriggerConfig(int jobType)
         {
-            string result = "";
-            switch (jobType) 
-            {
-                case (int)JobEnum.ByeByeJob:
-                    result = "groupbyebye";
-                    break;
-                case (int)JobEnum.HaveANightDayJob:
-                    result = "grouphaveanightday";
-                    break;
-                case (int)JobEnum.HelloJob:
-                    result = "grouphello";
-                    break;
-                default:
-                    break;
-            }
-            return result;
-        }
-
-        /// <summary>
-        /// lấy ra tên job dựa vào enum job
-        /// </summary>
-        private string GetJobNameByJobType(int jobType)
-        {
-            string result = "";
+            JobTriggerConfigByType? result = null;
             switch (jobType)
             {
                 case (int)JobEnum.ByeByeJob:
-                    result = "jobbyebye";
+                    result = new JobTriggerConfigByType()
+                    {
+                        JobName = "ByeByeJob",
+                        JobGroup = "GroupJobOne",
+                        TriggerName = "ByeByeTrigger",
+                        TriggerGroup = "GroupTriggerOne"
+                    };
                     break;
                 case (int)JobEnum.HaveANightDayJob:
-                    result = "jobhaveanightday";
+                    result = new JobTriggerConfigByType()
+                    {
+                        JobName = "HaveANightDayJob",
+                        JobGroup = "GroupJobOne",
+                        TriggerName = "HaveANightDayTrigger",
+                        TriggerGroup = "GroupTriggerOne"
+                    };
                     break;
                 case (int)JobEnum.HelloJob:
-                    result = "jobhello";
+                    result = new JobTriggerConfigByType()
+                    {
+                        JobName = "HelloJob",
+                        JobGroup = "GroupJobOne",
+                        TriggerName = "HelloTrigger",
+                        TriggerGroup = "GroupTriggerOne"
+                    };
                     break;
-                default:
+                case (int)JobEnum.GoodAfternoonJob:
+                    result = new JobTriggerConfigByType()
+                    {
+                        JobName = "GoodAfternoonJob",
+                        JobGroup = "GroupJobTwo",
+                        TriggerName = "GoodAfternoonTrigger",
+                        TriggerGroup = "GroupTriggerTwo"
+                    };
+                    break;
+                case (int)JobEnum.GoodEveningJob:
+                    result = new JobTriggerConfigByType()
+                    {
+                        JobName = "GoodEveningJob",
+                        JobGroup = "GroupJobTwo",
+                        TriggerName = "GoodEveningTrigger",
+                        TriggerGroup = "GroupTriggerTwo"
+                    };
+                    break;
+                case (int)JobEnum.GoodMorningJob:
+                    result = new JobTriggerConfigByType()
+                    {
+                        JobName = "GoodMorningJob",
+                        JobGroup = "GroupJobTwo",
+                        TriggerName = "GoodMorningTrigger",
+                        TriggerGroup = "GroupTriggerTwo"
+                    };
+                    break;
+                case (int)JobEnum.GoodNightJob:
+                    result = new JobTriggerConfigByType()
+                    {
+                        JobName = "GoodNightJob",
+                        JobGroup = "GroupJobTwo",
+                        TriggerName = "GoodNightTrigger",
+                        TriggerGroup = "GroupTriggerTwo"
+                    };
                     break;
             }
             return result;
@@ -146,25 +173,31 @@ namespace Job.BL
         /// <summary>
         /// tạo ra job
         /// </summary>
-        private IJobDetail BuildJobDetail(int jobType)
+        private JobBuilder GetJobBuilder(int jobType)
         {
-            IJobDetail result = null;
+            JobBuilder result = null;
             switch (jobType)
             {
                 case (int)JobEnum.ByeByeJob:
-                    result = JobBuilder.Create<ByeByeJob>()
-                                     .WithIdentity(GetJobNameByJobType(jobType), GetGroupByJobType(jobType))
-                                     .Build();
+                    result = JobBuilder.Create<ByeByeJob>();
                     break;
                 case (int)JobEnum.HaveANightDayJob:
-                    result = JobBuilder.Create<HaveANightDayJob>()
-                                     .WithIdentity(GetJobNameByJobType(jobType), GetGroupByJobType(jobType))
-                                     .Build();
+                    result = JobBuilder.Create<HaveANightDayJob>();
                     break;
                 case (int)JobEnum.HelloJob:
-                    result = JobBuilder.Create<HelloJob>()
-                                     .WithIdentity(GetJobNameByJobType(jobType), GetGroupByJobType(jobType))
-                                     .Build();
+                    result = JobBuilder.Create<HelloJob>();
+                    break;
+                case (int)JobEnum.GoodMorningJob:
+                    result = JobBuilder.Create<GoodMorningJob>();
+                    break;
+                case (int)JobEnum.GoodEveningJob:
+                    result = JobBuilder.Create<GoodEveningJob>();
+                    break;
+                case (int)JobEnum.GoodAfternoonJob:
+                    result = JobBuilder.Create<GoodAfternoonJob>();
+                    break;
+                case (int)JobEnum.GoodNightJob:
+                    result = JobBuilder.Create<GoodNightJob>();
                     break;
                 default:
                     break;
@@ -188,24 +221,28 @@ namespace Job.BL
                     IScheduler? scheduler = await GetScheduler();
                     if (scheduler != null)
                     {
-                        IJobDetail job = BuildJobDetail(jobType);
-                        ITrigger trigger = TriggerBuilder.Create()
-                                         .WithIdentity(GetJobNameByJobType(jobType), GetGroupByJobType(jobType))
-                                         .StartNow()
-                                         .WithSimpleSchedule(x => x
-                                         .WithIntervalInSeconds(JobUtility.ConfigGlobal.SleepBetweenTwoTime)
-                                         .RepeatForever())
-                                         .Build();
+                        JobTriggerConfigByType? configJob = GetJobTriggerConfig(jobType);
+                        if (configJob != null)
+                        {
+                            IJobDetail job = GetJobBuilder(jobType).WithIdentity(configJob.JobName, configJob.JobGroup).Build();
+                            ITrigger trigger = TriggerBuilder.Create()
+                                             .WithIdentity(configJob.TriggerName, configJob.TriggerGroup)
+                                             .StartNow()
+                                             .WithSimpleSchedule(x => x
+                                             .WithIntervalInSeconds(JobUtility.ConfigGlobal.SleepBetweenTwoTime)
+                                             .RepeatForever())
+                                             .Build();
 
-                        bool existedJob = await scheduler.CheckExists(job.Key);
-                        if (existedJob)
-                        {
-                            createSuccess = false;
-                        }
-                        else
-                        {
-                            await scheduler.ScheduleJob(job, trigger);
-                            createSuccess = true;
+                            bool existedJob = await scheduler.CheckExists(job.Key);
+                            if (existedJob)
+                            {
+                                createSuccess = false;
+                            }
+                            else
+                            {
+                                await scheduler.ScheduleJob(job, trigger);
+                                createSuccess = true;
+                            }
                         }
                     }
                 }
@@ -233,8 +270,12 @@ namespace Job.BL
                     IScheduler? scheduler = await GetScheduler();
                     if (scheduler != null)
                     {
-                        TriggerKey triggerKey = new TriggerKey(GetJobNameByJobType(jobType), GetGroupByJobType(jobType));
-                        deleteSuccess = await scheduler.UnscheduleJob(triggerKey);
+                        JobTriggerConfigByType? configJob = GetJobTriggerConfig(jobType);
+                        if (configJob != null)
+                        {
+                            TriggerKey triggerKey = new TriggerKey(configJob.TriggerName, configJob.TriggerGroup);
+                            deleteSuccess = await scheduler.UnscheduleJob(triggerKey);
+                        }
                     }
                 }
             }
@@ -260,9 +301,13 @@ namespace Job.BL
                     IScheduler? scheduler = await GetScheduler();
                     if (scheduler != null)
                     {
-                        IJobDetail job = BuildJobDetail(jobType);
-                        await scheduler.PauseJob(job.Key);
-                        pauseSuccess = true;
+                        JobTriggerConfigByType? configJob = GetJobTriggerConfig(jobType);
+                        if (configJob != null)
+                        {
+                            IJobDetail job = GetJobBuilder(jobType).WithIdentity(configJob.JobName, configJob.JobGroup).Build();
+                            await scheduler.PauseJob(job.Key);
+                            pauseSuccess = true;
+                        }
                     }
                 }
             }
@@ -289,9 +334,13 @@ namespace Job.BL
                     IScheduler? scheduler = await GetScheduler();
                     if (scheduler != null)
                     {
-                        IJobDetail job = BuildJobDetail(jobType);
-                        await scheduler.ResumeJob(job.Key);
-                        resumeSuccess = true;
+                        JobTriggerConfigByType? configJob = GetJobTriggerConfig(jobType);
+                        if (configJob != null)
+                        {
+                            IJobDetail job = GetJobBuilder(jobType).WithIdentity(configJob.JobName, configJob.JobGroup).Build();
+                            await scheduler.ResumeJob(job.Key);
+                            resumeSuccess = true;
+                        }
                     }
                 }
             }

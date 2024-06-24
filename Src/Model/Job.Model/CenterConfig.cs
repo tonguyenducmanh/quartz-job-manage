@@ -18,6 +18,11 @@ namespace Job.Model
         public int SleepBetweenTwoTime { get; set; }
 
         /// <summary>
+        /// tạm dừng 1 thread sau khi chạy 1 job
+        /// </summary>
+        public int SleepThreadAfterOneJob { get; set; } = 0;
+
+        /// <summary>
         /// cấu hình cho thư viện quartz đọc job trong database
         /// </summary>
         public Dictionary<string, string> ConfigQuartz { get; set; }

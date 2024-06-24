@@ -7,6 +7,10 @@
     {
         HaveANightDayJob = 1,
         ByeByeJob = 2,
-        HelloJob = 3
+        HelloJob = 3,
+        GoodMorningJob = 4,
+        GoodAfternoonJob = 5,
+        GoodEveningJob = 6,
+        GoodNightJob = 7
     }
 }
